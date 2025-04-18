@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindWell Connect - Your Space for Mental Wellness</title>
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #4a90e2; /* Calming Blue */
+            --secondary-color: #7ed321; /* Soft Green */
+            --accent-color: #f5a623; /* Warm Orange */
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: #68b318;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: #d9901e;
+            transform: translateY(-2px);
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: var(--font-serif);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(74, 144, 226, 0.6), rgba(74, 144, 226, 0.8)), url('https://images.unsplash.com/photo-1534790566855-4cb788d389ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover; /* Example background */
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-serif);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero .btn-accent {
+             font-size: 1.2rem;
+             padding: 15px 30px;
+             margin-top: 1rem;
+        }
+
+        /* --- Sections General Styling --- */
+        section {
+            padding: 60px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            font-family: var(--font-serif);
+        }
+
+        /* --- Immediate Help Section --- */
+        #immediate-help {
+            background-color: #ffebee; /* Light reddish background to denote urgency */
+            border-top: 5px solid #e57373;
+            border-bottom: 5px solid #e57373;
+        }
+
+        #immediate-help h2 {
+            color: #d32f2f; /* Red color for urgency */
+        }
+
+        .crisis-info {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .crisis-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .crisis-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap; /* Ensure wrapping on smaller screens */
+        }
+
+        .contact-item {
+            background: var(--light-bg);
+            padding: 15px 20px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            min-width: 250px; /* Minimum width for each contact */
+        }
+
+        .contact-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- About Section --- */
+        #about {
+            background-color: var(--light-bg);
+        }
+        #about .container {
+             display: flex;
+             gap: 40px;
+             align-items: center;
+        }
+         #about .about-content {
+             flex: 1;
+         }
+        #about img {
+            flex-basis: 40%; /* Adjust width as needed */
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+
+        /* --- Resources Section --- */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-card i { /* Placeholder for icons */
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            /* Add display: block if using actual icon fonts */
+        }
+
+        .resource-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .resource-card p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Coping Strategies Section --- */
+        #coping {
+             background-color: var(--light-bg);
+        }
+
+        .strategy-list {
+            list-style: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .strategy-list li {
+            background: var(--white);
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .strategy-list li strong {
+            color: var(--primary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #333;
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+             #about .container {
+                 flex-direction: column;
+                 text-align: center;
+             }
+             #about img {
+                margin-top: 20px;
+                max-width: 80%;
+                flex-basis: auto; /* Reset flex-basis */
+             }
+
+            .crisis-contacts {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-item {
+                 width: 90%; /* Make contacts wider on small screens */
+                 min-width: unset;
+                 margin-bottom: 15px;
+            }
+        }
+
+         @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav ul li {
+                margin: 0 8px;
+            }
+             nav ul li a {
+                 font-size: 0.9rem;
+             }
+             .hero h1 {
+                 font-size: 2rem;
+             }
+            .btn {
+                 padding: 10px 20px;
+                 font-size: 0.9rem;
+            }
+            .hero .btn-accent {
+                 font-size: 1rem;
+                 padding: 12px 25px;
+            }
+             section h2 {
+                 font-size: 1.8rem;
+             }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">MindWell<span>Connect</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#immediate-help">Get Help Now</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#coping">Coping Tips</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="home" class="hero">
+            <h1>Your Mental Wellness Matters</h1>
+            <p>Find support, resources, and immediate help when you need it most. You are not alone.</p>
+            <a href="#immediate-help" class="btn btn-accent">Need Immediate Help? Click Here</a>
+        </section>
+
+        <section id="immediate-help">
+            <div class="container">
+                <h2>Immediate Mental Health Assistance</h2>
+                <div class="crisis-info">
+                    <p>If you are in crisis or experiencing distressing thoughts, please reach out immediately. You can contact the following confidential resources 24/7. **If you are in immediate danger, please call your local emergency number (e.g., 911, 112, 999) or go to the nearest emergency room.**</p>
+                    <div class="crisis-contacts">
+                        <div class="contact-item">
+                            <h3>National Suicide Prevention Lifeline (USA Example)</h3>
+                            <p>Call or Text: <a href="tel:988">988</a></p>
+                            <p>Website: <a href="https://988lifeline.org/" target="_blank" rel="noopener noreferrer">988lifeline.org</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Crisis Text Line (Example)</h3>
+                            <p>Text HOME to 741741</p>
+                            <p>Website: <a href="https://www.crisistextline.org/" target="_blank" rel="noopener noreferrer">crisistextline.org</a></p>
+                        </div>
+                         <div class="contact-item">
+                            <h3>The Samaritans (UK Example)</h3>
+                            <p>Call: <a href="tel:116123">116 123</a></p>
+                            <p>Website: <a href="https://www.samaritans.org/" target="_blank" rel="noopener noreferrer">samaritans.org</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Find a Helpline (Global Directory)</h3>
+                            <p>Website: <a href="https://findahelpline.com/" target="_blank" rel="noopener noreferrer">findahelpline.com</a></p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 0.9rem; color: #555;">Remember, reaching out is a sign of strength. Confidential help is available.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                 <div class="about-content">
+                     <h2>Welcome to MindWell Connect</h2>
+                    <p>We believe everyone deserves access to mental health support and resources. MindWell Connect is a space designed to provide information, encouragement, and pathways to help.</p>
+                    <p>Our mission is to break down stigma, offer practical coping strategies, and connect individuals with the professional help they may need. Explore our resources and remember that taking care of your mental health is essential.</p>
+                    <br>
+                    <a href="#resources" class="btn btn-primary">Explore Resources</a>
+                 </div>
+                 <img src="https://images.unsplash.com/photo-1579601567296-907a5f3f4e8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="A calming nature scene">
+            </div>
+        </section>
+
+
+        <section id="resources">
+            <div class="container">
+                <h2>Mental Health Resources</h2>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h3>Understanding Anxiety</h3>
+                        <p>Learn about different anxiety disorders, symptoms, and common treatment approaches.</p>
+                        <a href="#" class="btn btn-secondary">Learn More</a> </div>
+                    <div class="resource-card">
+                         <h3>Coping with Depression</h3>
+                        <p>Information on depression, its impact, and strategies for managing symptoms and seeking help.</p>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                    <div class="resource-card">
+                         <h3>Managing Stress</h3>
+                        <p>Explore techniques for identifying stressors and developing healthy coping mechanisms.</p>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                     <div class="resource-card">
+                         <h3>Finding Support Groups</h3>
+                        <p>Discover the benefits of peer support and find groups for various mental health concerns.</p>
+                        <a href="#" class="btn btn-secondary">Find Groups</a>
+                    </div>
+                     <div class="resource-card">
+                         <h3>Mindfulness & Meditation</h3>
+                        <p>Practice techniques to stay present, reduce stress, and improve emotional regulation.</p>
+                        <a href="#" class="btn btn-secondary">Explore Practices</a>
+                    </div>
+                     <div class="resource-card">
+                         <h3>Seeking Professional Help</h3>
+                        <p>Guidance on finding therapists, understanding therapy types, and preparing for appointments.</p>
+                        <a href="#" class="btn btn-secondary">Get Guidance</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="coping">
+            <div class="container">
+                <h2>Simple Coping Strategies</h2>
+                <ul class="strategy-list">
+                    <li><strong>Deep Breathing:</strong> Inhale slowly through your nose, hold for a few seconds, and exhale slowly through your mouth. Repeat several times to calm your nervous system.</li>
+                    <li><strong>Mindful Observation:</strong> Focus on your senses. Name 5 things you see, 4 things you feel, 3 things you hear, 2 things you smell, and 1 thing you taste.</li>
+                    <li><strong>Physical Activity:</strong> Engage in light exercise like walking, stretching, or yoga. Movement can significantly boost your mood.</li>
+                    <li><strong>Connect with Someone:</strong> Talk to a trusted friend, family member, or peer supporter about how you're feeling.</li>
+                    <li><strong>Limit News & Social Media:</strong> If feeling overwhelmed, take breaks from constant information streams.</li>
+                    <li><strong>Practice Gratitude:</strong> Take a moment to think about or write down things you are thankful for, however small.</li>
+                    <li><strong>Engage in a Hobby:</strong> Spend time doing something you enjoy, like reading, listening to music, drawing, or gardening.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> MindWell Connect. All rights reserved.</p>
+            <p><strong>Disclaimer:</strong> This website provides information and resources but does not offer medical advice or professional therapy. If you are in crisis, please use the immediate help resources listed above or contact emergency services.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p> </div>
+    </footer>
+
+    <script>
+        // --- Simple JavaScript for dynamic elements ---
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Active Navigation Link Highlighting on Scroll (Basic)
+        const sections = document.querySelectorAll('section[id]');
+        const navLi = document.querySelectorAll('header nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // Adjust the offset trigger point as needed (e.g., 150 pixels before the section top)
+                const sectionTriggerPoint = sectionTop - 150;
+
+                if (pageYOffset >= sectionTriggerPoint) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+             // Add a default 'home' if near the top
+            if (pageYOffset < 300 && !current) { // Adjust 300 as needed
+                current = 'home';
+            }
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+             // If no section is matched (e.g., scrolled past the last section), maybe keep the last one active or none.
+             // This basic version might not perfectly handle the very bottom of the page.
+        });
+
+        // Smooth scroll for nav links (redundant if html scroll-behavior: smooth is supported, but good fallback/enhancement)
+        document.querySelectorAll('header nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                // Ensure it's an internal link
+                if (targetId && targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                         e.preventDefault(); // Prevent default jump
+                        // Optional: Calculate header height to offset scroll position if header is sticky
+                         const headerOffset = document.querySelector('header').offsetHeight + 20; // Add extra padding
+                         const elementPosition = targetElement.getBoundingClientRect().top;
+                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+
+                        // Update active class immediately on click
+                        navLi.forEach(a => a.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Smooth scroll for hero button
+        const heroButton = document.querySelector('.hero .btn-accent');
+        if (heroButton) {
+             heroButton.addEventListener('click', function(e) {
+                 const targetId = this.getAttribute('href');
+                 if (targetId && targetId.startsWith('#')) {
+                     const targetElement = document.querySelector(targetId);
+                      if (targetElement) {
+                          e.preventDefault();
+                          const headerOffset = document.querySelector('header').offsetHeight + 20;
+                          const elementPosition = targetElement.getBoundingClientRect().top;
+                          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                          window.scrollTo({
+                              top: offsetPosition,
+                              behavior: "smooth"
+                          });
+                      }
+                 }
+             });
+        }
+
+
+    </script>
+
+</body>
+</html>
